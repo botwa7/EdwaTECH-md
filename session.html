@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edwa-MD Session Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 50px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #25D366, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px;
+            border-radius: 15px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: transparent;            color: #888;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 25px;            padding: 25px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 12px;
+            display: none;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-title {
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .code-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 2em;
+            text-align: center;
+            color: #00ff88;
+            letter-spacing: 5px;
+            margin: 15px 0;
+            border: 1px dashed #00ff88;
+        }
+
+        .qr-container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 15px auto;        }
+
+        .qr-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .info-box {
+            background: rgba(37, 211, 102, 0.1);
+            border-left: 4px solid #25D366;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .info-box strong {
+            color: #25D366;
+        }
+
+        .loader {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #25D366;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .status.online {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .status.offline {            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .footer a {
+            color: #25D366;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .code-display {
+                font-size: 1.5em;
+                letter-spacing: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🤖</div>
+            <h1>Edwa-MD</h1>
+            <p class="subtitle">Session Generator - WhatsApp Bot</p>
+        </div>
+
+        <div id="status" class="status offline">
+            ⚠️ Bot la pa konekte
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('pairing')">📱 Pairing Code</button>
+            <button class="tab" onclick="switchTab('qr')">📷 QR Code</button>
+        </div>
+
+        <!-- Pairing Code Section -->
+        <div id="pairing" class="content active">
+            <div class="input-group">                <label for="phone">Nimewo WhatsApp (ak kod peyi)</label>
+                <input type="text" id="phone" placeholder="50948887766" value="509">
+            </div>
+            
+            <button class="btn" onclick="getPairingCode()" id="pairBtn">
+                🔑 Jwenn Pairing Code
+            </button>
+
+            <div class="loader" id="pairLoader"></div>
+
+            <div class="result" id="pairResult">
+                <div class="result-title">✅ Pairing Code Ou a:</div>
+                <div class="code-display" id="pairCode"></div>
+                <div class="info-box">
+                    <strong>📋 Enstriksyon:</strong><br>
+                    1. Louvri WhatsApp sou telefòn ou<br>
+                    2. Ale nan Paramèt → Aparèy konekte<br>
+                    3. Klike sou "Konekte ak nimewo telefòn"<br>
+                    4. Antre kòd ki anwo a
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div id="qr" class="content">
+            <button class="btn" onclick="getQRCode()" id="qrBtn">
+                🔄 Rafraîchir QR Code
+            </button>
+
+            <div class="loader" id="qrLoader"></div>
+
+            <div class="result" id="qrResult">
+                <div class="result-title">📷 Scanne QR Code a:</div>
+                <div class="qr-container" id="qrContainer"></div>
+                <div class="info-box">
+                    <strong>📋 Enstriksyon:</strong><br>
+                    1. Louvri WhatsApp<br>
+                    2. Ale nan Paramèt → Aparèy konekte<br>
+                    3. Klike sou "Konekte yon aparèy"<br>
+                    4. Scanne QR code ki anwo a
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Edwa-MD | Power by Boss Edwa 🇭🇹</p>
+            <p><a href="https://github.com/botwa7/EdwaTECH-md" target="_blank">GitHub</a> • 
+               <a href="https://whatsapp.com/channel/0029VaX7FVI2Jl8Ek9Ce383k" target="_blank">Channel</a></p>
+        </div>
+    </div>
+    <script>
+        // Verifye status bot la chak 3 segonn
+        setInterval(checkStatus, 3000);
+
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                const statusDiv = document.getElementById('status');
+                
+                if (data.status === 'connected') {
+                    statusDiv.className = 'status online';
+                    statusDiv.innerHTML = '✅ Bot la konekte';
+                } else {
+                    statusDiv.className = 'status offline';
+                    statusDiv.innerHTML = '⚠️ Bot la pa konekte';
+                }
+            } catch (error) {
+                console.log('Erè status:', error);
+            }
+        }
+
+        function switchTab(tab) {
+            // Retire active nan tout tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+            
+            // Ajoute active nan tab ki chwazi a
+            event.target.classList.add('active');
+            document.getElementById(tab).classList.add('active');
+        }
+
+        async function getPairingCode() {
+            const phone = document.getElementById('phone').value;
+            const btn = document.getElementById('pairBtn');
+            const loader = document.getElementById('pairLoader');
+            const result = document.getElementById('pairResult');
+            const codeDisplay = document.getElementById('pairCode');
+
+            if (!phone || phone.length < 10) {
+                alert('Tanpri antre yon nimewo valid (egzanp: 50948887766)');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Ap jenerasyon...';
+            loader.style.display = 'block';
+            result.classList.remove('show');
+            try {
+                const response = await fetch('/api/pair', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: phone })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    codeDisplay.textContent = data.code;
+                    result.classList.add('show');
+                } else {
+                    alert('Erè: ' + data.error);
+                }
+            } catch (error) {
+                alert('Erè koneksyon: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔑 Jwenn Pairing Code';
+                loader.style.display = 'none';
+            }
+        }
+
+        async function getQRCode() {
+            const btn = document.getElementById('qrBtn');
+            const loader = document.getElementById('qrLoader');
+            const result = document.getElementById('qrResult');
+            const qrContainer = document.getElementById('qrContainer');
+
+            btn.disabled = true;
+            btn.textContent = '⏳ Ap chaje...';
+            loader.style.display = 'block';
+            result.classList.remove('show');
+
+            try {
+                const response = await fetch('/api/qr');
+                const data = await response.json();
+
+                if (data.success) {
+                    qrContainer.innerHTML = `<img src="${data.qr}" alt="QR Code">`;
+                    result.classList.add('show');
+                } else {
+                    alert('Pa gen QR Code disponib. Rekòmanse bot la.');
+                }
+            } catch (error) {
+                alert('Erè koneksyon: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔄 Rafraîchir QR Code';                loader.style.display = 'none';
+            }
+        }
+
+        // Check status nan demaraj
+        checkStatus();
+    </script>
+</body>
+  </html>
