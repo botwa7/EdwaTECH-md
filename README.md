@@ -1,6 +1,4 @@
-## 📄 **README.MD KONPLÈ - PRÈ POU KOPIYE!**
-
-Men README.md konplè a, tout ansanm:
+## 📄 **README.MD KONPLÈ **
 
 ```markdown
 # 🤖 EdwaTECH-md
