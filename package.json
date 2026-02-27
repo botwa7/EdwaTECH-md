@@ -1,0 +1,17 @@
+{
+  "name": "edwa-md-v2",
+  "version": "2.0.0",
+  "description": "WhatsApp Bot by Boss Edwa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.5",
+    "qrcode-terminal": "^0.12.0",
+    "pino": "^8.11.0",
+    "axios": "^1.6.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
