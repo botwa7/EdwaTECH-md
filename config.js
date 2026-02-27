@@ -18,7 +18,7 @@ module.exports = {
     
     // Lis tout Plugins yo (21 komand)
     PLUGINS_LIST: [
-        "menu", "ping", "owner", "repo", "save", "warn",
+        "menu", "ping", "owner", "repo", "save", "warn", "update",
         "promote", "demote", "kick", "add", "antilink",
         "welcome", "goodbye", "hidetag", "tagall",
         "setppgroup", "setdesc", "close", "open",
