@@ -1,0 +1,58 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konekte WhatsApp</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #075e54; }
+        #qrcode { margin: 20px auto; max-width: 300px; min-height: 300px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; }
+        .status { margin-top: 10px; font-weight: bold; color: #555; }
+        img { max-width: 100%; }
+        .success { color: green; font-size: 1.2rem; }
+    </style>
+    <!-- Libreri pou transfòme tèks QR la an imaj -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📱 Eskane Kòd QR la</h1>
+        <div id="qrcode">Ap chaje...</div>
+        <p class="status" id="status">Ap tann kòd QR...</p>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const qrContainer = document.getElementById('qrcode');
+        const statusText = document.getElementById('status');
+        let qrcodeObj = null;
+
+        // Lè sèvè a voye kòd QR la
+        socket.on('qr', (qrData) => {
+            statusText.innerText = "Eskane kòd sa a ak WhatsApp ou.";
+            statusText.className = "status";
+            qrContainer.innerHTML = ""; // Netwaye ansyen kòd la
+            
+            // Kreye imaj QR kòd la
+            qrcodeObj = new QRCode(qrContainer, {
+                text: qrData,
+                width: 256,
+                height: 256
+            });
+        });
+
+        // Lè koneksyon an reyisi
+        socket.on('connected', () => {
+            qrContainer.innerHTML = "✅ <b>Koneksyon Reyisi!</b><br>WhatsApp ou konekte.";
+            qrContainer.style.border = "none";
+            statusText.innerText = "Ou ka fèmen paj sa a.";
+            statusText.className = "status success";
+        });
+    </script>
+</body>
+  </html>
