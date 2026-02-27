@@ -163,9 +163,9 @@ Ouvrez le fichier `config.js` et modifiez les valeurs :
 module.exports = {
     BOT_NAME: "Edwa-md 🇭🇹",           // Nom du bot
     OWNER_NAME: "BOSS 『E』『d』『w』『a』", // Votre nom
-    OWNER_NUMBER: "509XXXXXXXX",        // VOTRE numéro (sans +)
-    OWNER_LINK: "https://wa.me/...",    // Lien WhatsApp
-    CHANNEL_LINK: "https://...",        // Lien Channel
+    OWNER_NUMBER: "50943099723",        // VOTRE numéro (sans +)
+    OWNER_LINK: "https://wa.me/message/LVB523ITVYMCF1",    // Lien WhatsApp
+    CHANNEL_LINK: "https://whatsapp.com/channel/0029VaX7FVI2Jl8Ek9Ce383k",        // Lien Channel
     REPO_LINK: "https://github.com/botwa7/EdwaTECH-md",
     PREFIX: ".",                        // Préfixe des commandes
     MODE: "public",                     // 'public' ou 'private'
