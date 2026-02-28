@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+    <meta charset="UTF-8">
+    <title>Konekte WhatsApp</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #f0f2f5; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .container { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        #qrcode { margin: 20px auto; max-width: 300px; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Eskane QR Kòd la</h1>
+        <div id="qrcode"></div>
+        <p id="status">Ap tann...</p>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const qrContainer = document.getElementById('qrcode');
+        const statusText = document.getElementById('status');
+
+        socket.on('qr', (qrData) => {
+            statusText.innerText = "Eskane kòd sa a.";
+            qrContainer.innerHTML = "";
+            new QRCode(qrContainer, { text: qrData, width: 256, height: 256 });
+        });
+
+        socket.on('connected', () => {
+            qrContainer.innerHTML = "✅ Konekte!";
+            statusText.innerText = "Bot la pare.";
+        });
+    </script>
+</body>
+      </html>
