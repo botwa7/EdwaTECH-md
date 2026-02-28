@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: EdwaTECH-md
+    env: node
+    region: oregon
+    plan: free
+    rootDir: .
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /api/status
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: NODE_VERSION
+        value: 18.17.0
