@@ -18,7 +18,7 @@
   "author": "BOSS 『E』『d』『w』『a』",
   "license": "GPL-2.0",
   "dependencies": {
-    "@whiskeysockets/baileys": ""@whiskeysockets/baileys": "github:mouricedevs/Baileys"",
+    "@whiskeysockets/baileys": "github:mouricedevs/Baileys",
     "express": "^4.18.2",
     "qrcode": "^1.5.3",
     "qrcode-terminal": "^0.12.0",
